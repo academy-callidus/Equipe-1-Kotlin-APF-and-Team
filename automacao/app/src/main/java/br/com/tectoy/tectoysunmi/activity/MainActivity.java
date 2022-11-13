@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             new DemoDetails(R.string.function_paygo, R.drawable.function_payment, Paygo.class),
             new DemoDetails(R.string.function_scan, R.drawable.function_scanner, null),
             new DemoDetails(R.string.function_nfc, R.drawable.function_nfc, NfcExemplo.class),
-            new DemoDetails(R.string.function_m_Sitef, R.drawable.function_payment, MSitef.class),
+            new DemoDetails(R.string.function_m_Sitef, R.drawable.function_payment, MSitefJava.class),
             new DemoDetails(R.string.display, R.drawable.telas, DisplayActivity.class)
     };
     private VideoDisplay videoDisplay = null;
