@@ -76,7 +76,7 @@ public class MSitefJava extends BaseActivity {
 
     private Locale mLocale = new Locale("pt", "BR");
 
-
+    
     ///  Defines tef
     private static int REQ_CODE = 4321;
     Gson gson = new Gson();
