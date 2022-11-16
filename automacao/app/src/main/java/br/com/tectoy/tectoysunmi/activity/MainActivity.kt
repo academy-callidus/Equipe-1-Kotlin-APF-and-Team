@@ -407,7 +407,7 @@ open class MainActivity : AppCompatActivity(){
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             holder.demoDetails = demos[position]
-            holder.tv.text = demos[position].titleId.toString()
+            holder.tv.setText(demos[position].titleId)
             holder.tv.setCompoundDrawablesWithIntrinsicBounds(null,getDrawable(demos[position].iconResID),null,null)
         }
 
