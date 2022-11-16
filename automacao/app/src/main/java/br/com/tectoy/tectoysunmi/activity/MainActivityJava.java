@@ -407,7 +407,7 @@ public class MainActivityJava extends AppCompatActivity {
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
                             }else {
-                                Intent intent = new Intent(MainActivityJava.this, ScannerActivity.class);
+                                Intent intent = new Intent(MainActivityJava.this, ScannerActivityJava.class);
                                 startActivity(intent);
                             }
                         }
