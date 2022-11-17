@@ -30,7 +30,10 @@ class BitmapActivity : BaseActivity(){
         setBack()
 
         binding.picAlign.setOnClickListener{
-            val pos = arrayOf<String>(resources.getString(R.string.align_left), resources.getString(R.string.align_mid), resources.getString(R.string.align_right))
+            val pos = arrayOf<String>(
+                resources.getString(R.string.align_left),
+                resources.getString(R.string.align_mid),
+                resources.getString(R.string.align_right))
             val listDialog = DialogCreater.createListDialog(this@BitmapActivity,
                 resources.getString(R.string.align_form),
                 resources.getString(R.string.cancel),

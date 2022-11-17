@@ -86,7 +86,18 @@ class BarCodeActivity : BaseActivity()  {
         }
         //Modelos de barcorde
         binding.bcEncode.setOnClickListener {
-            val list = arrayOf("UPC-A", "UPC-E", "EAN13", "EAN8", "CODE39", "ITF", "CODABAR", "CODE93", "CODE128A", "CODE128B", "CODE128C")
+            val list = arrayOf(
+                "UPC-A",
+                "UPC-E",
+                "EAN13",
+                "EAN8",
+                "CODE39",
+                "ITF",
+                "CODABAR",
+                "CODE93",
+                "CODE128A",
+                "CODE128B",
+                "CODE128C")
             val listDialog = DialogCreater.createListDialog(this@BarCodeActivity,
                 resources.getString(R.string.encode_barcode),
                 resources.getString(R.string.cancel),
@@ -101,7 +112,10 @@ class BarCodeActivity : BaseActivity()  {
         }
         //HRI posição
         binding.bcPosition.setOnClickListener{
-            val list = arrayOf(resources.getString(R.string.no_print), resources.getString(R.string.barcode_up), resources.getString(R.string.barcode_down), resources.getString(R.string.barcode_updown))
+            val list = arrayOf(resources.getString(R.string.no_print),
+                resources.getString(R.string.barcode_up),
+                resources.getString(R.string.barcode_down),
+                resources.getString(R.string.barcode_updown))
             val listDialog = DialogCreater.createListDialog(this@BarCodeActivity,
                 resources.getString(R.string.text_position),
                 resources.getString(R.string.cancel),
