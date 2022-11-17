@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import br.com.tectoy.tectoysunmi.R
 import br.com.tectoy.tectoysunmi.databinding.MsitefBinding
 import br.com.tectoy.tectoysunmi.utils.TectoySunmiPrint
@@ -42,6 +44,7 @@ class MSitef : BaseActivity(){
     var acao = "venda"
 
     val i = Intent(Intent.ACTION_VIEW, Uri.parse("pos7api://pos7"))
+    lateinit var getResult : ActivityResultLauncher<Intent>
 
     var venda = Venda()
     var teste: String? = null
@@ -92,6 +95,42 @@ class MSitef : BaseActivity(){
             listDialog.show()
         }
 
+        //Trata o resultado da Activity iniciada
+        getResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            val retornoSitef = gson.fromJson(respSitefToJson(it.data!!), RetornoMsiTef::class.java)
+            if(it.resultCode == REQ_CODE && it.resultCode == RESULT_OK){
+                if(retornoSitef.getCodResp() == "0"){
+                    var impressao = ""
+                    if(!retornoSitef.textoImpressoCliente()?.isEmpty()!!)
+                        impressao = retornoSitef.textoImpressoEstabelecimento().toString()
+                    if(!retornoSitef.textoImpressoEstabelecimento()?.isEmpty()!!) {
+                        impressao += "\n\n-----------------------------     \n"
+                        impressao += retornoSitef.textoImpressoCliente().toString()
+                    }
+                    if (!impressao.isEmpty() && acao == "reimpressao") {
+                        dialogImpressao(impressao, 17)
+                    }
+                }
+
+                // Verifica se ocorreu um erro durante venda ou cancelamento
+                if (acao == "venda" || acao == "cancelamento") {
+                    if (retornoSitef.getCodResp()?.isEmpty() == true || retornoSitef.getCodResp() != "0" || retornoSitef.getCodResp() == null
+                    ) {
+                        //dialodTransacaoNegadaMsitef(retornoSitef);
+                    } else {
+                        dialogTransacaoAprovadaMsitef(retornoSitef)
+                    }
+                }
+            } else {
+                // ocorreu um erro
+
+                // ocorreu um erro
+                if(acao == "venda" || acao == "cancelamento") {
+                    //dialodTransacaoNegadaMsitef(retornoSitef);
+                }
+            }
+        }
+
         binding.btnRepressao.setOnClickListener {
             acao = "reimpressao"
             execulteSTefReimpressao()
@@ -139,7 +178,7 @@ class MSitef : BaseActivity(){
         } else if ("Carteira Digital" == teste) {}
         intentSitef.putExtra("isDoubleValidation", "0")
         intentSitef.putExtra("caminhoCertificadoCA", "ca_cert_perm")
-        //registerActivityForResult()
+        getResult.launch(intentSitef)
     }
 
     private fun execulteSTefCancelamento(){
@@ -159,7 +198,6 @@ class MSitef : BaseActivity(){
         //registerActivityForResult()
     }
 
-    //override para registerActivityForResult()
 
     private fun execulteSTefReimpressao(){
         val intentSitef = Intent("br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF")
@@ -178,6 +216,10 @@ class MSitef : BaseActivity(){
         //registerActivityForResult()
     }
 
+    private fun startActivity(){
+
+    }
+
     fun validaIp(ipServer : String) : Boolean{
         val p : Pattern = Pattern.compile(
             "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -193,7 +235,7 @@ class MSitef : BaseActivity(){
         binding.txtValorOperacao.addTextChangedListener(object : MoneyTextWatcher(binding.txtValorOperacao){})
     }
 
-    private fun dialogTrasacaoAprovadaMsitef(retornoMsiTef : RetornoMsiTef){
+    private fun dialogTransacaoAprovadaMsitef(retornoMsiTef : RetornoMsiTef?){
         val alertDialog = AlertDialog.Builder(this@MSitef)
         val cupom = StringBuilder()
         val teste = StringBuilder()
@@ -201,13 +243,13 @@ class MSitef : BaseActivity(){
         cupom.append(
             """
                  Via Cliente 
-                 ${retornoMsiTef.getVIA_CLIENTE()}
+                 ${retornoMsiTef?.getVIA_CLIENTE()}
                  """.trimIndent()
         )
         teste.append(
             """
                 Via Estabelecimento 
-                ${retornoMsiTef.getVIA_ESTABELECIMENTO()}
+                ${retornoMsiTef?.getVIA_ESTABELECIMENTO()}
                 """.trimIndent()
         )
 
@@ -298,3 +340,4 @@ class MSitef : BaseActivity(){
     }
 
 }
+
