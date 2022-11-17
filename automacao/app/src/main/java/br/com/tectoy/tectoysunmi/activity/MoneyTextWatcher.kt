@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.*
 
-class MoneyTextWatcher: TextWatcher{
+open class MoneyTextWatcher: TextWatcher{
     private lateinit var editTextWeakReference:WeakReference<EditText>
     constructor(editText:EditText, locale:Locale){
         this.editTextWeakReference = WeakReference<EditText>(editText)
