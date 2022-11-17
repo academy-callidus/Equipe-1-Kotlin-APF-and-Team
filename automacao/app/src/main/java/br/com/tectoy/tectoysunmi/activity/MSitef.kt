@@ -20,6 +20,12 @@ import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
+/**
+ * Exemplo de venda e cancelamento
+ *
+ * Código em kotlin
+ *  @author Felipe Peres
+ */
 class MSitef : BaseActivity(){
 
     lateinit var binding : MsitefBinding
