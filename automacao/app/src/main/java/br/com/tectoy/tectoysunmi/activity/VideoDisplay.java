@@ -97,7 +97,7 @@ public class VideoDisplay extends BasePresentation {
                 }
             }else {
                 if(player.getPosition()!=0)
-                positon = player.getPosition();
+                    positon = player.getPosition();
             }
         }
     }
