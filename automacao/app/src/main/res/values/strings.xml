@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TecToy Sunmi Java Android</string>
+    <string name="app_name">TecToy Sunmi Kotlin Android</string>
 
     <!--funtion list-->
     <string name="function_all">Teste Completo</string>
