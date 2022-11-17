@@ -7,7 +7,7 @@
     android:textAlignment="center"
     android:padding="5dp"
     android:background="@color/background"
-    tools:context=".activity.MainActivityJava">
+    tools:context=".activity.MainActivity">
 
     <view
         android:id="@+id/worklist"
