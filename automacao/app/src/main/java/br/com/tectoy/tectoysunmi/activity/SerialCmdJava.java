@@ -6,10 +6,10 @@ package br.com.tectoy.tectoysunmi.activity;
  * 这里封装了基本的语法和常用指令，别的详见指令集文档
  */
 
-public class SerialCmd {
+public class SerialCmdJava {
     //命令格式：Prefix Storage Tag SubTag {Data} [, SubTag {Data}] [; Tag SubTag {Data}] […] ; Suffix
     public static final String PREFIX_HEX = "7E0130303030"; //~<SOH>0000
-    public static final String STORAGE_EVER_HEX = "40";    //@ 是设置永久有效
+    public static final String TOSRAGE_EVER_HEX = "40";    //@ 是设置永久有效
     public static final String STORAGE_TEMP_HEX = "23";    //# 则是临时设置，断电后失效
     //tag、subtag、data，这三个合起来就是具体的命令；多个命令可以合起来发，也可以挨个发（需间隔50ms或收到返回值后发）
     public static final String SUFFIX_HEX = "3B03";         //;<ETX>

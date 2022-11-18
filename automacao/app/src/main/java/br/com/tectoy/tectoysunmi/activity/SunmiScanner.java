@@ -83,14 +83,14 @@ public class SunmiScanner {
         Log.i(TAG, "isResponseData[hex]:" + data + "[" + ByteUtils.str2HexString(data)+ "]");
         switch (type){
             case TYPE_KEYBOARD: //键值，开头会缺少2字节，这俩是不可见字符：<STX><SOH>
-                data = ByteUtils.hexStr2Str(SerialCmd.RES_PREFIX_HEX).substring(0,2) + data;
+                data = ByteUtils.hexStr2Str(SerialCmdJava.RES_PREFIX_HEX).substring(0,2) + data;
                 break;
             case TYPE_BROADCAST: //广播
                 break;
             default:
                 break;
         }
-        return (data.length() > 6 && data.substring(0,6).equals(ByteUtils.hexStr2Str(SerialCmd.RES_PREFIX_HEX)));
+        return (data.length() > 6 && data.substring(0,6).equals(ByteUtils.hexStr2Str(SerialCmdJava.RES_PREFIX_HEX)));
     }
 
     /**
@@ -314,7 +314,7 @@ public class SunmiScanner {
             return;
         }
         //PREFIX_HEX和SUFFIX_HEX拿出来是因为：有的指令并没有这俩货
-        String cmd = ByteUtils.hexStr2Str(SerialCmd.PREFIX_HEX + ByteUtils.str2HexString(simpleCmd) + SerialCmd.SUFFIX_HEX);
+        String cmd = ByteUtils.hexStr2Str(SerialCmdJava.PREFIX_HEX + ByteUtils.str2HexString(simpleCmd) + SerialCmdJava.SUFFIX_HEX);
         sendCommand(cmd);
     }
 
@@ -329,7 +329,7 @@ public class SunmiScanner {
         @Override
         public void run(){
             if (strCmd.length() > 6)
-                isHaveResponse = strCmd.substring(0, 6).equals(ByteUtils.hexStr2Str(SerialCmd.PREFIX_HEX));
+                isHaveResponse = strCmd.substring(0, 6).equals(ByteUtils.hexStr2Str(SerialCmdJava.PREFIX_HEX));
             else
                 isHaveResponse = false;
             //置true是因为：需要等返回值或MAX_RESPONSE_TIME
@@ -350,12 +350,12 @@ public class SunmiScanner {
             while (isWaittingResponse){
                 //没有返回值的命令要等50ms，才能够发送下一条指令
                 if (!isHaveResponse){
-                    if (System.currentTimeMillis() - curTime > SerialCmd.MIN_SEND_TIME){
+                    if (System.currentTimeMillis() - curTime > SerialCmdJava.MIN_SEND_TIME){
                         Log.i(TAG, "SendThread:NLS cmd has no response");
                         return;
                     }
                 }
-                else if (System.currentTimeMillis() - curTime > SerialCmd.MAX_RESPONSE_TIME){
+                else if (System.currentTimeMillis() - curTime > SerialCmdJava.MAX_RESPONSE_TIME){
                     Log.i(TAG,"SendThread:response timeout");
                     for (Map.Entry<String, OnScannerListener> entry : scannerListenerHashMap.entrySet())
                         entry.getValue().onResponseTimeout();
