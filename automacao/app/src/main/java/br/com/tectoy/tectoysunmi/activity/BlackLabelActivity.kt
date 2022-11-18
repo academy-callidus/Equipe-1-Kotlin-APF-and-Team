@@ -21,20 +21,26 @@ class BlackLabelActivity:BaseActivity() {
     private fun initView(){
         setContentView(binding.root)
         binding.blSetting.setOnClickListener {
-            Toast.makeText(this@BlackLabelActivity, R.string.toast_11, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@BlackLabelActivity,
+                R.string.toast_11,
+                Toast.LENGTH_LONG).show()
         }
 
         binding.blCheck.setOnClickListener {
             if(TectoySunmiPrint.getInstance().isBlackLabelMode()){
                 TectoySunmiPrint.getInstance().sendRawData(ESCUtil.gogogo());
             }else{
-                Toast.makeText(this@BlackLabelActivity, R.string.toast_10, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BlackLabelActivity,
+                    R.string.toast_10,
+                    Toast.LENGTH_LONG).show()
             }
         }
 
         binding.blSample.setOnClickListener {
             if(!TectoySunmiPrint.getInstance().isBlackLabelMode()){
-                Toast.makeText(this@BlackLabelActivity, R.string.toast_10, Toast.LENGTH_LONG).show();
+                Toast.makeText(this@BlackLabelActivity,
+                    R.string.toast_10,
+                    Toast.LENGTH_LONG).show();
             }else{
                 TectoySunmiPrint.getInstance().printQr("www.tectoysunmi.com.br", 6, 3);
                 TectoySunmiPrint.getInstance().print3Line();
