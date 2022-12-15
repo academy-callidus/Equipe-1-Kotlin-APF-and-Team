@@ -8,10 +8,8 @@ import java.io.UnsupportedEncodingException
 
 import br.com.tectoy.tectoysunmi.R
 import br.com.tectoy.tectoysunmi.databinding.ActivityAllBinding
-import br.com.tectoy.tectoysunmi.utils.BluetoothUtil
-import br.com.tectoy.tectoysunmi.utils.BytesUtil
-import br.com.tectoy.tectoysunmi.utils.ESCUtil
-import br.com.tectoy.tectoysunmi.utils.TectoySunmiPrint
+import br.com.tectoy.tectoysunmi.utils.*
+import br.com.tectoy.tectoysunmi.utils.BitmapUtil
 
 
 /**
